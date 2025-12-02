@@ -6,6 +6,11 @@ import { Router } from 'express';
 import authRoutes from '../features/auth/auth.routes';
 import categoryRoutes from '../features/category/category.routes';
 import expenseRoutes from '../features/expense/expense.routes';
+import budgetRoutes from '../features/budget/budget.routes';
+import savingsRoutes from '../features/savings/savings.routes';
+import taskRoutes from '../features/task/task.routes';
+import noteRoutes from '../features/note/note.routes';
+
 
 const router = Router();
 
@@ -17,6 +22,18 @@ router.use('/categories', categoryRoutes);
 
 // Expense routes
 router.use('/expenses', expenseRoutes);
+
+// Budget routes
+router.use('/budget', budgetRoutes);
+
+// Savings routes
+router.use('/savings', savingsRoutes);
+
+// Tasks routes
+router.use('/tasks', taskRoutes);
+
+// Notes routes
+router.use('/notes', noteRoutes);
 
 // API info
 router.get('/', (_req, res) => {
