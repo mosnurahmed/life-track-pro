@@ -16,15 +16,16 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import 'express-async-errors'; // Handles async errors automatically
-
+import http from 'http';
 // Import configurations
 import { env } from './shared/config/env.config';
 import { connectDatabase } from './shared/config/database.config';
-
+import { initializeFirebase } from './config/firebase'; 
 // Import middlewares
 import { requestLogger } from './shared/middlewares/logger.middleware';
 import { errorHandler, notFoundHandler } from './shared/middlewares/error.middleware';
-
+import { initializeSocketServer } from './socket/socket.server';
+import { startTaskReminderScheduler } from './features/task/task.scheduler';
 // Import routes
 import apiRoutes from './routes';  // ← Add this
 
@@ -32,6 +33,7 @@ import apiRoutes from './routes';  // ← Add this
  * Initialize Express Application
  */
 const app: Application = express();
+const httpServer = http.createServer(app);
 
 /**
  * Security Middleware
@@ -101,6 +103,8 @@ app.get('/api', (_req, res) => {  // ✅ req → _req
  */
 app.use(notFoundHandler);
 
+const io = initializeSocketServer(httpServer);
+console.log('✅ Socket.io server initialized')
 /**
  * Global Error Handler
  * 
@@ -119,6 +123,13 @@ const startServer = async (): Promise<void> => {
   try {
     // Connect to MongoDB
     await connectDatabase();
+    initializeFirebase(); 
+    // ✅ Start task reminder scheduler
+    startTaskReminderScheduler();
+    //  httpServer.listen(env.PORT, () => {
+    //   console.log(`🚀 Server running on port ${env.PORT}`);
+    //   console.log(`📡 Socket.io ready for connections`);
+    // });
     
     // Start Express server
     app.listen(env.PORT, () => {
@@ -127,6 +138,9 @@ const startServer = async (): Promise<void> => {
       console.log(`🌍 Environment: ${env.NODE_ENV}`);
       console.log(`🔗 API URL: http://localhost:${env.PORT}/api`);
       console.log(`💚 Health: http://localhost:${env.PORT}/health`);
+      console.log(`🚀 Server running on port ${env.PORT}`);
+      console.log(`📡 Socket.io ready for connections`);
+      console.log(`⏰ Task scheduler running`)
     });
     
   } catch (error) {

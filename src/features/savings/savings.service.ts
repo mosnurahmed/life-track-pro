@@ -5,6 +5,7 @@
 import SavingsGoal, { ISavingsGoal } from './savings.model';
 import { NotFoundError, BadRequestError } from '../../shared/utils/error.util';
 import mongoose from 'mongoose';
+import { sendSavingsMilestone } from '../notification/notification.service';
 
 /**
  * Create Savings Goal DTO
@@ -188,10 +189,25 @@ export const addContribution = async (
   });
   
   // Update current amount
+    const oldAmount = goal.currentAmount;
   goal.currentAmount += data.amount;
   
   // Save (pre-save hook will auto-complete if reached)
   await goal.save();
+    const progress = (goal.currentAmount / goal.targetAmount) * 100;
+  
+  // ✅ Send notification at milestones (25%, 50%, 75%, 100%)
+  const milestones = [25, 50, 75, 100];
+  const oldProgress = (oldAmount / goal.targetAmount) * 100;
+  
+  for (const milestone of milestones) {
+    if (oldProgress < milestone && progress >= milestone) {
+      sendSavingsMilestone(userId, goal.title, progress).catch(err => {
+        console.error('Failed to send savings milestone:', err);
+      });
+      break;  // Send only one notification
+    }
+  }
   
   return goal;
 };

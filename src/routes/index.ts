@@ -10,6 +10,9 @@ import budgetRoutes from '../features/budget/budget.routes';
 import savingsRoutes from '../features/savings/savings.routes';
 import taskRoutes from '../features/task/task.routes';
 import noteRoutes from '../features/note/note.routes';
+import chatRoutes from '../features/chat/chat.routes';
+import bazarRoutes from '../features/bazar/bazar.routes';
+import dashboardRoutes from '../features/dashboard/dashboard.routes';
 
 
 const router = Router();
@@ -34,6 +37,16 @@ router.use('/tasks', taskRoutes);
 
 // Notes routes
 router.use('/notes', noteRoutes);
+
+// Chat routes
+router.use('/chat', chatRoutes);
+
+// Bazar routes
+router.use('/bazar', bazarRoutes);
+
+// Dashboard routes
+router.use('/dashboard', dashboardRoutes);
+
 
 // API info
 router.get('/', (_req, res) => {

@@ -14,7 +14,7 @@ import Category from '../category/category.model';
 import Expense from '../expense/expense.model';
 import { NotFoundError } from '../../shared/utils/error.util';
 import mongoose from 'mongoose';
-
+import { sendBudgetAlert } from '../notification/notification.service';
 /**
  * Budget Status Interface
  */
@@ -124,7 +124,11 @@ export const getCategoryBudgetStatus = async (
     status = 'safe';
     color = '#27AE60';  // Green
   }
-  
+    if (percentage >= 80) {
+    sendBudgetAlert(userId, category.name, percentage).catch(err => {
+      console.error('Failed to send budget alert:', err);
+    });
+  }
   return {
     categoryId: category._id.toString(),
     categoryName: category.name,
