@@ -164,4 +164,4 @@ temp/
 # ==========================================
 uploads/
 public/uploads/
-static/uploads/
+static/uploads/firebase-service-account.json
