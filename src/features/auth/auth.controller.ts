@@ -85,7 +85,25 @@ export const removeDeviceToken = async (req: Request, res: Response): Promise<Re
   
   return sendSuccess(res, result);
 };
-
+/**
+ * Get My Device Tokens
+ * 
+ * Route: GET /api/auth/device-tokens
+ */
+export const getMyDeviceTokens = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const authReq = req as AuthenticatedRequest;
+  const userId = authReq.user!.userId.toString();
+  
+  const tokens = await authService.getUserDeviceTokens(userId);
+  
+  return sendSuccess(res, {
+    deviceCount: tokens.length,
+    tokens
+  });
+};
 /**
  * Refresh Access Token
  */

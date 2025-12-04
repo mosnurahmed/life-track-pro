@@ -280,3 +280,19 @@ export const removeDeviceToken = async (userId: string, token: string) => {
   
   return { message: 'Device token removed successfully' };
 };
+/**
+ * Get User Device Tokens
+ * 
+ * Purpose: Get all tokens for sending notifications
+ */
+export const getUserDeviceTokens = async (
+  userId: string
+): Promise<string[]> => {
+  const user = await User.findById(userId).select('deviceTokens');
+  
+  if (!user) {
+    return [];
+  }
+  
+  return user.deviceTokens;
+};

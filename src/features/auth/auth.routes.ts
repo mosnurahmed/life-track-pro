@@ -85,4 +85,13 @@ router.delete(
   authController.removeDeviceToken
 );
 
+/**
+ * Get my device tokens
+ */
+router.get(
+  '/device-tokens',
+  authMiddleware,
+  authController.getMyDeviceTokens
+);
+
 export default router;

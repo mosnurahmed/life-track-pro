@@ -1,0 +1,167 @@
+# ==========================================
+# Node.js Dependencies
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ==========================================
+# Environment Variables (CRITICAL!)
+# ==========================================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ==========================================
+# Firebase Credentials (VERY IMPORTANT!)
+# ==========================================
+firebase-service-account.json
+*-firebase-adminsdk-*.json
+
+# ==========================================
+# TypeScript Build Output
+# ==========================================
+dist/
+build/
+*.tsbuildinfo
+
+# ==========================================
+# Logs
+# ==========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# ==========================================
+# Operating System Files
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ==========================================
+# IDE / Editor Files
+# ==========================================
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# WebStorm / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# ==========================================
+# Testing & Coverage
+# ==========================================
+coverage/
+*.coverage
+.nyc_output/
+.jest/
+
+# ==========================================
+# Temporary Files
+# ==========================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
+tmp/
+temp/
+
+# ==========================================
+# Database Files (if using local DB)
+# ==========================================
+*.sqlite
+*.sqlite3
+*.db
+
+# ==========================================
+# Miscellaneous
+# ==========================================
+.npm
+.eslintcache
+.node_repl_history
+.yarn-integrity
+
+# ==========================================
+# Deployment & CI/CD
+# ==========================================
+.serverless/
+.terraform/
+.terraform.lock.hcl
+
+# ==========================================
+# Backup Files
+# ==========================================
+*.backup
+*.bak
+*.old
+
+# ==========================================
+# Documentation (Optional - if you don't want to track)
+# ==========================================
+# docs/build/
+# *.pdf
+
+# ==========================================
+# SSL Certificates (if any)
+# ==========================================
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ==========================================
+# Custom Application Files
+# ==========================================
+uploads/
+public/uploads/
+static/uploads/
